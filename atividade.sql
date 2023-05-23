@@ -1,0 +1,1 @@
+create database SUCOS_VENDAS_01;
