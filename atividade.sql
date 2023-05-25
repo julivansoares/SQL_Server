@@ -40,9 +40,47 @@ TINYINT =byte 1
 
 //////////////////////////////////////////////////////////////////////////
                NUMEROS EXATOS
-
-
 MONEY   =byte 8
 
 SMALLMONEY=byte 4
+
+////////////////////////////////////////////////////////////////////////////
+                falores decimais
+
+float 
+
+real = bytes 4
+
+///////////////////////////
+
+date =0001-01-01 até 9999-12-31
+
+datetime =AAAA-MM-DD HH:MM:SS.MMM
+
+SMALLDATE =AAAA-MM-DD HH:MM:SS
+
+TIME = HH:MM:SS.MMMMMMM
+
+//////////////////////////////////////////////////
+   CADEIA DE CARECTERES
+
+CHAR = 0 A 8000 BYTES
+
+VARCHAR=0 A 8000 BYTES OU USAR MAX =2 GB
+
+NCHAR = 0 A 4000 BYTES
+
+NVARCHAR=0 A 4000 BYTES OU USAR MAX =2 GB
+
+
+BINARY = 0 A 8000 BYTES
+
+VARBINARY=0 A 8000 BYTES OU USAR MAX =2 GB
+
+
+BINARY = 0 A 8000 BYTES
+
+NVARBINARY=0 A 8000 BYTES OU USAR MAX =2 GB
+
+
  
