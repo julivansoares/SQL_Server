@@ -139,6 +139,9 @@ CREATE TABLE VENDEDORES (
  [PRECO DE LISTA] SMALLMONEY
  );
 
+////////////////////////////////////////////////////////////////////////////////////////////
+                           INCERINDO DADOS NA TABELA 
+
 
 INSERT INTO PRODUTOS(
 [CODIGO DO PRODUTO],
@@ -156,19 +159,19 @@ VALUES
  
  
 INSERT INTO VENDEDORES
-VALUES('00236','Cláudia Morais',0.08),('00237','Marcela Ferreira',0.09);
+VALUES('00236','Cláudia Morais',0.08),('00237','Marcela Ferreira',0.09);  = INCERINDO DADOS NA TABELA
  
- 
- SELECT * FROM VENDEDORES v ; 
-
-
-SELECT * from PRODUTOS p ; 
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                ATUALIZANDO DADOS NA TABELA
 
 UPDATE [PRODUTOS]
 SET [PRECO DE LISTA] = 3
 WHERE [CODIGO DO PRODUTO] = '544931';
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 
 
