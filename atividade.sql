@@ -85,7 +85,7 @@ NVARBINARY=0 A 8000 BYTES OU USAR MAX =2 GB
 
 
 //////////////////////////////////////////////////////////////
-
+                criando uma tabela
 
 create database SUCOS_VENDAS_02
  ON (NAME ='SUCOS_VENDAS.DAT',
@@ -169,9 +169,81 @@ SET [PRECO DE LISTA] = 3
 WHERE [CODIGO DO PRODUTO] = '544931';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                               Adicionando uma primary key a um campo na tabela
+
+
+ALTER TABLE VENDEDORES  ADD CONSTRAINT PK_VENDEDORES
+PRIMARY KEY  CLUSTERED (MATRICULA);
+
+
+OBS: VC TAMBÉM PODE DEFINIR O CAMPO QUE SERÁ A PRIMARY KEY NA CRIAÇÃO DA TABELA
+
+EX:
+
+
+CREATE TABLE VAN(
+
+MATRICULA CHAR(8) PRIMARY KEY NOT NULL,
+
+NOME: VARCHAR(50)
+
+);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        DELETANDO UM ARQUIVO DA TABELA 
+
+
+  DELETE FROM SUCOS_VENDAS_01.dbo.PRODUTOS
+WHERE [CODIGO DO PRODUTO]=N'1088126' AND [NOME DO PRODUTO]=N'Linha Citros - 1 Litro - Limão' AND EMBALAGEM=N'PET' AND TAMANHO=N'1L' AND SABOR=N' Limão' AND [PRECO DE LISTA]=7.0000;
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+                             ALTERANDO DADOS NA  TABELA  
+
+
+ ALTER TABLE [PRODUTOS] ALTER COLUMN [CODIGO DO PRODUTO] VARCHAR(20) NOT NULL;
+
+ ALTER TABLE VENDEDORES ALTER COLUMN MATRICULA VARCHAR (50) NOT NULL;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    função chamada YEAR
 
 
 
+há uma função chamada YEAR (ano), que podemos aplicar à condição e, com isso, visualizaremos as pessoas nascidas no ano de 1995.
+
+SELECT * FROM [TABELA DE CLIENTES] WHERE YEAR [DATA DE NASCIMENTO] = 1995;
+
+
+
+///////////////////////////////////////////////////
+
+Então, a função pode ser aplicada tanto no filtro, quanto na seleção. Outras funções que poderíamos utilizar, são MONTH (mês) e DAY (dia).
+
+
+
+
+SELECT [NOME], [ESTADO], [DATA DE NASCIMENTO]
+, YEAR ([DATA DE NASCIMENTO]) AS ANO
+, MONTH ([DATA DE NASCIMENTO]) AS MES
+, DAY ([DATA DE NASCIMENTO]) AS DIA
+FROM [TABELA DE CLIENTES];
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                        função AND
+
+
+Se os dois nasceram no dia 12, mas somente o segundo mora na Tijuca, aplicando o filtro para saber quem nasceu no dia 12 e mora na Tijuca, o resultado será de apenas uma linha, dos dados de César Teixeira. Para nos certificarmos disso, basta adicionar AND [BAIRRO] = 'Tijuca'.
+
+
+
+SELECT * FROM [TABELA DE CLIENTES] WHERE DAY [DATA DE NASCIMENTO] =12 AND [BAIRRO] = 'Tijuca';
+
+
+
+SELECT * FROM [TABELA DE VENDEDORES] WHERE [CIDADE] = 'Rio de Janeiro' AND [TEM DEPENDENTE] = 1;
 
 
 
