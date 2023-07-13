@@ -1,0 +1,11 @@
+                                                  cláusula distinct:
+
+
+Se eu por acaso executar isso daqui, note: do sabor maçã eu só tenho lata e PET. Além disso, eu posso usar o distinct para mais de um campo. Eu quero saber das combinações de embalagem e sabores.
+
+Então se eu colocar aqui:
+
+SELECT DISTINCT EMBALAGEM, SABOR FROM TABELA _DE_PRODUTOS;
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+

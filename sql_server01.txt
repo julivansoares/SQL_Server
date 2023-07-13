@@ -37,9 +37,152 @@ SELECT FROM CLIENTE WHERE CLIENTE= 'CLIENTE1';
 
 SELECT * FROM TABELA_DE_PRODUTOS WHERE 1=1;
 
-SELECT * FROM TABELA_DE_PRODUTOS WHERE CODIGO_DO_PRODUTO = 290478;
+---------------------------------------------------------------------------------------------------------------------------
+SE FOR APLICAR OR
 
-SELECT * FROM TABELA_DE_PRODUTOS WHERE SABOR = 'Laranja';
+Se eu aplicar o or, eu vou ver quando um produto ou é manga, ou é 470, ou os dois casos também, no or vai aparecer. Então se eu rodar aqui:
+
+SELECT * FROM TABELA_DE_PRODUTOS WHERE SABOR = 'Manga' OR TAMANHO ='470 ml';
+---------------------------------------------------------------------------------------------------------------------------
+SE APLICAR O NOT
+
+Mas eu quero aplicar o not sobre a expressão toda, então que eu costumo fazer? Nós colocamos aqui um abre e um fecha parênteses, para mostrar para o SQL que o not está sendo aplicado sobre esta expressão toda e não somente sobre a primeira parcela da expressão:
+
+SELECT * FROM TABELA_DE_PRODUTOS WHERE NOT SABOR = 'Manga' AND TAMANHO = '470 ml';
+
+----------------------------------------------------------------------------------------------------------------------------
+
+APLICAR O NOT SOBRE A EXPRESSÃO TODA
+
+Mas eu quero aplicar o not sobre a expressão toda, então que eu costumo fazer? Nós colocamos aqui um abre e um fecha parênteses, para mostrar para o SQL que o not está sendo aplicado sobre esta expressão toda e não somente sobre a primeira parcela da expressão:
+
+SELECT * FROM TABELA_DE_PRODUTOS WHERE NOT (SABOR = 'Manga' AND TAMANHO='470 ml');
+-----------------------------------------------------------------------------------------------------------------------------
+
+SE APLICAR O IN
+
+in facilita, porque fica muito mais simples a segunda expressão lógica, menos coisa para escrever do que a outra.
+Porém, quando temos uma expressão que tenhas vários or, podemos representar ela desta maneira:
+
+SELECT * FROM TABELA_DE_PRODUTOS WHERE SABOR in ('Manga', 'Laranja', 'Melancia');
+-----------------------------------------------------------------------------------------------------------------------------
+
+Então o in vem para substituir quando eu tenho vários or encadeados. E eu posso depois, se quiser, aplicar sobre essa expressão in, desde que eu use aqui os parênteses, eu posso colocar aqui assim alguma coisa por exemplo:
+
+SELECT * FROM TABELA_DE_PRODUTOS WHERE 
+SABOR in ('Manga', 'Laranja', 'Melancia') AND TAMANHO = '1 Litro';
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Quando temos esse tipo de expressão, uma maior do que alguma coisa e menor do que outra, podemos estar usando a expressão between.
+
+SELECT * FROM TABELA_DE_CLIENTES WHERE CIDADE in ('Rio de Janeiro', Sao Paulo') AND (IDADE BETWEEN 20 AND 25);
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+5)Clique em Nova Consulta e entre com o código
+
+SELECT * FROM TABELA_DE_CLIENTES;
+-------------------------------------------------------------------
+
+6) Para visualizar campos determinados digite o código
+
+SELECT CPF, NOME, BAIRRO, CIDADE FROM TABELA_DE_CLIENTES;
+-------------------------------------------------------------------
+
+7) Para trocar a ordem de visualização dos campos
+
+SELECT NOME, CPF, BAIRRO, CIDADE FROM TABELA_DE_CLIENTES;
+-------------------------------------------------------------------
+
+8) Para criar um Alias para CPF e NOME use
+
+SELECT CPF AS IDENTIFICADOR, NOME AS [NOME DE CLIENTE], BAIRRO, CIDADE FROM TABELA_DE_CLIENTES;
+--------------------------------------------------------------------
+
+9) Usando o Alias para o nome da tabela
+
+SELECT CPF AS IDENTIFICADOR, NOME AS [NOME DE CLIENTE], BAIRRO, CIDADE FROM TABELA_DE_CLIENTES TDC;
+---------------------------------------------------------------------
+
+10) Usando o Alias para selecionar campos
+
+SELECT TDC.CPF, TDC.NOME, TDC.BAIRRO FROM TABELA_DE_CLIENTES TDC;
+---------------------------------------------------------------------
+
+11) Para mostrar todos os campos da tabela
+
+
+SELECT TDC.* FROM TABELA_DE_CLIENTES TDC;
+---------------------------------------------------------------------
+
+12) Pode não usar o Alias para visualizar os campos
+
+SELECT TABELA_DE_CLIENTES.CPF, TABELA_DE_CLIENTES.NOME FROM TABELA_DE_CLIENTES;
+---------------------------------------------------------------------
+
+14) Para mostrar todos os produtos entre com o código
+
+SELECT * FROM TABELA_DE_PRODUTOS;
+---------------------------------------------------------------------
+
+15) Usando o filtro WHERE 1=1
+
+SELECT * FROM TABELA_DE_PRODUTOS WHERE 1=1;
+---------------------------------------------------------------------
+
+16) Usando o filtro WHERE 1=0
 
 SELECT * FROM TABELA_DE_PRODUTOS WHERE 1=0;
+---------------------------------------------------------------------
+
+17) Usando um filtro realista
+
+SELECT * FROM TABELA_DE_PRODUTOS WHERE CODIGO_DO_PRODUTO = '290478';
+---------------------------------------------------------------------
+
+18) Usando o filtro para o sabor Laranja
+
+SELECT * FROM TABELA_DE_PRODUTOS WHERE SABOR = 'Laranja';
+---------------------------------------------------------------------
+
+19) Para mostrar qual embalagem é de PET
+
+SELECT * FROM TABELA_DE_PRODUTOS WHERE EMBALAGEM = 'PET';
+
+---------------------------------------------------------------------
+
+20) Se usar somente minúsculas no campo EMBALAGEM
+
+SELECT * FROM TABELA_DE_PRODUTOS WHERE EMBALAGEM = 'pet';
+---------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

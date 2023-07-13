@@ -1,0 +1,14 @@
+					   utilização do LIKE
+
+expressão do slide like coringa teste, significa que eu vou estar selecionando todo mundo que começa com qualquer coisa e termine a palavra com o texto teste.
+
+
+SELECT * FROM TABELA_DE_CLIENTES WHERE BAIRRO LIKE '%jardins%';
+
+SELECT * FROM TABELA_DE_PRODUTOS 
+WHERE SABOR IN ('Lima/Limão', 'Morango/Limão');
+
+
+SELECT  * FROM TABELA_DE_PRODUTOS 
+WHERE SABOR LIKE '%Limão');
+
