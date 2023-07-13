@@ -1,0 +1,21 @@
+como funciona o having. Por exemplo, se recorda dessa consulta que fizemos no vídeo anterior? Eu estou agrupando número de funcionários por estados e eu tenho lá como resultado o estado X com 90 funcionários e o estado Y com 50 funcionários.
+
+Digamos que eu queira agora fazer o seguinte: eu só quero ver no resultado da consulta debaixo os estados que possuem a soma do número de funcionários maior do que 60. Qual é o campo que possui esta soma? Não é NUM_FUNC, porque NUM_FUNC, que é número de funcionários, é o número de funcionários por cliente.
+
+Mas quem me apresenta este resultado aqui é a função de agregação. Ou seja, é a soma de NUM_FUNC. Então no primeiro momento, se você não sabe nada de having e vai usar todos os seus conhecimentos de consulta de SQL até esse momento e eu der esse problema para vocês, vai ser muito provável que você apresente esta solução: WHERE SUM(NUM_FUNC) > 60.
+
+Afinal, como eu aplico where? Eu coloco aqui um campo e uma condição lógica. Só que como esse campo não é NUM_FUNC, mas é a soma de NUM_FUNC, eu coloco essa expressão aqui.
+
+Seria talvez a coisa mais lógica. Porém, tem um problema. Esse comando não funciona.
+
+Para dar esse resultado, eu não posso usar no meu filtro de campos com funções de agregação. No filtro where eu só posso colocar campos da tabela. Então como eu limito o resultado da agregação dentro de um select? Através do having.
+
+Então a maneira certa de eu fazer esse tipo de consulta seria isso daqui:
+
+
+
+SELECT ESTADO SUM(NUM_FUNC) FROM CLIENTE  GROUP BY ESTADO HAVING SUM(NUM_FUNC) > 60;
+
+----------------------------------------------------------------------------------------------------------
+
+SELECT EMBALAGEM MAX(PRECO_DE_LISTA) AS PRECO MAX, MIN(PRECO_DE_LISTA) AS PRECO MIN FROM TABELA_DE_PRODUTOS GROUP BY EMBALAGEM;

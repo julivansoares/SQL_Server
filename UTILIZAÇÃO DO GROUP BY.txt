@@ -1,0 +1,27 @@
+ara usarmos o group by, é importante que você tenha, na seleção dos campos, pelo menos um campo em que nós apliquemos o que nós chamamos de uma função de agregação. As funções de agregações contidas no SQL são quatro: o SUM, o AVG, o MAX e o MIN
+
+SELECT * FROMT TABELA_DE_CLIENTES;
+
+SELECT CIDADE, IDADE FROM TABELA_DE_CLIENTES ORDER BY CIDADE, IDADE;
+
+-------------------------------------------------------------------------------------
+Porém, aqui todo mundo que tem sede no Rio de Janeiro e aqui em São Paulo. Porém, agora eu quero agrupar. Para fazer essa agrupação, eu vou aplicar o SUM da idade e dizer que eu quero ver o resultado agrupado, ou seja, group by, por cidade.
+
+SELECT CIDADE, SUM(IDADE) AS IDADE FROM TABELA_DE_CLIENTES ORDER BY CIDADE, IDADE;
+-------------------------------------------------------------------------------------
+
+SELECT CIDADE, SUM(IDADE) AS IDADE FROM TABELA_DE_CLIENTES GROUP BY CIDADE
+
+
+SELECT CIDADE, SUM(IDADE) AS IDADE, SUM(LIMITE_DE_CREDITO) FROM TABELA_DE_CLIENTES GROUP BY CIDADE;
+
+
+--------------------------------------------------------------------------------------
+
+Nós podemos usar aqui o count lá para a nossa tabela de produto. Então, por exemplo, eu vou pegar a embalagem e vou contar quantos produtos eu tenho por embalagem:
+
+SELECT EMBALAGEM COUNT(*) AS NUMERO_DE_CLIENTES FROM TABELA_DE_PRODUTOS;
+
+
+
+Nem acredito que falta tão pouquinho para você se formar em ciência da computação. Lembro que antes de você começar, eu te incentivei muito, pois já sabia que tinha tudo a ver com você. Parabéns por tudo o que viveu durante esses anos, por toda a sua bagagem acadêmica e profissional. Que você seja muito realizado trabalhando com o que ama, programas de computador, e que cada vez mais você vá além! Parabéns!

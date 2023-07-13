@@ -1,0 +1,9 @@
+e eu executar esta consulta aqui, claro que o meu maior preço e o meu menor preço vão ficar diferentes. No caso de garrafa, o maior e o menor ficam iguais, por quê? Porque só deve ter um produto que seja mais caro de dez reais e aí acaba sendo que o mínimo e o máximo, ele é maior.
+
+Mas digamos que eu queira ver desta consulta somente os que possuem o maior preço de lista mais do que 20 unidade monetária, 20 reais ou 20 dólares, não importa.
+
+Basta eu aplicar sobre esta consulta o having:
+
+SELECT EMBALAGEM MAX(PRECO_DE_LISTA) AS PRECO MAX, MIN(PRECO_DE_LISTA) AS PRECO MIN 
+FROM TABELA_DE_PRODUTOS WHERE PRECO_DE_LISTA >= 10 
+GROUP BY EMBALAGEM HAVING MAX(PRECO_DE_LISTA) >=20

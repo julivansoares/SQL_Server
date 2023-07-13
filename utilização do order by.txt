@@ -1,0 +1,21 @@
+Usando a cláusula order by. Basicamente você coloca order by, uma lista de campos e a direção dessa ordenação. Asc vem de ascendente, vai vir do menor para o maior e desc, descendente, do maior para o menor.
+
+
+SELECT * FROM CLIENTES ORDER BY DATA_COMP;
+
+SELECT * FROM TABELA_DE_PRODUTOS ORDER BY PRECO_DE_LISTA;
+
+SELECT * FROM TABELA_DE_PRODUTOS ORDER BY PRECO_DE_LISTA ASC;
+
+SELECT * FROM TABELA_DE_PRODUTOS ORDER BY PRECO_DE_LISTA DESC;
+
+SELECT * FROM TABELA_DE_PRODUTOS ORDER BY EMBALAGEM, NOME_DO_PRODUTO;
+
+SELECT * FROM TABELA_DE_PRODUTOS ORDER BY EMBALAGEM DESC, NOME_DO_PRODUTO DESC;
+
+SELECT * FROM TABELA_DE_PRODUTOS  WHERE nome_do_produto = 'Linha Refrescante - 1 Litro - Morango/Limao';
+
+SELECT * FROM ITENS_NOTAS_FISCAIS WHERE codigo_do_produto = '1101035'
+ORDER BY QUANTIDADE DESC;
+
+
