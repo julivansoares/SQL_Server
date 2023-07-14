@@ -1,0 +1,35 @@
+Essa ligação entre essas duas tabelas nós chamamos de junção, ou join, ou seja, através do join eu posso ligar duas ou mais tabelas e, a partir dessa ligação, eu faço a seleção dos campos que eu quero. E claro, quando eu faço essa junção, eu preciso dizer qual é o campo em comum das duas tabelas que faz essa ligação.
+
+Então eu tenho o from a primeira tabela, inner join a segunda tabela. Ser primeira ou ser segunda tabela eu vou mostrar para vocês um pouco mais à frente, é um critério seu, mas nós temos duas tabelas nesse exemplo aqui, que eu quero juntar, então eu coloco from uma das tabelas, inner join a outra tabela.
+
+E aí depois eu coloco a palavra on e embaixo eu coloco uma igualdade, mostrando o campo em comum da primeira tabela igual o campo da segunda tabela. Aqui embaixo eu estou usando o campo que vai me permitir fazer a ligação, então aqui eu estou colocando CLIENTE.CLIENTE = MOVIMENTO.CLIENTE.
+
+Se nós voltarmos aqui anteriormente, da tabela de cliente o campo em comum é o campo cliente, ou seja, CLIENTE. CLIENTE, se juntando com MOVIMENTO.CLIENTE. então é o que eu tenho aqui embaixo nesta igualdade.
+
+Ou seja, fazendo isso eu estou juntando as duas tabelas e aí eu consigo, no meu resultado da seleção, pegar os dois campos de uma tabela com os dois campos de outra tabela.
+
+-----------------------------------------------------------------------------------------------------------
+
+Eu fiz um relatório, onde eu juntei, eu fiz a matrícula e fiz um count do número de notas, mas eu quero ver no meu relatório esse nome, só que esse nome está na tabela de vendedores, logo, para isso, eu preciso fazer o meu inner join.
+
+Eu preciso fazer o que? O meu join. Então como é que nós faríamos?
+
+SELECT MATRICULA, NOME, COUNT(*) AS NUMERO_NOTAS FROM NOTAS_FISCAIS 
+INNER JOIN TABELA_DE_VENDEDORES 
+ON NOTAS_FISCAIS.MATRICULA = TABELA_DE_VENDEDORES.MATRICULA 
+GROUP BY MATRICULA, NOME;
+
+-------------------------------------------------------------------------------
+
+Então nós vamos colocar agora sempre. E aqui embaixo no group by, eu tenho que repetir a minha declaração que foi feita ali em cima.
+
+Se eu executar agora esta consulta, note que agora o meu resultado ficou melhor:
+
+SELECT NOTAS_FISCAIS.MATRICULA, TABELA_DE_VENDEDORES.NOME, COUNT(*) AS NUMERO_NOTAS 
+FROM NOTAS_FISCAIS 
+INNER JOIN TABELA_DE_VENDEDORES 
+ON NOTAS_FISCAIS.MATRICULA = TABELA_DE_VENDEDORES.MATRICULA 
+GROUP BY NOTAS_FISCAIS.MATRICULA, TABELA_DE_VENDEDORES.NOME;
+------------------------------------------------------------------------------
+
+

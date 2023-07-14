@@ -1,0 +1,29 @@
+
+QUANDO UTILIZO O RIGHT JOIN ELE TRARA TODOS OS DADOS DA TABELA DO LADO DIREITO
+
+SELECT DISTINCT 
+TV.NOME AS NOME_DO_VENDEDOR, 
+TV.BAIRRO AS BAIRRO_DO_VENDEDOR,
+TC.BAIRRO AS BAIRRO_DO_CLIENTE, 
+TC.NOME AS NOME_DO_CLIENTE 
+FROM TABELA_DE_CLIENTES TC 
+RIGHT JOIN TABELA_DE_VENDEDORES TV 
+ON TC.BAIRRO = TV.BAIRRO;
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+Parênteses: para exibir somente o vendedor que não tem nenhum cliente no seu bairro, bastava colocarmos um WHERE TC.NOME IS NULL:
+
+SELECT DISTINCT 
+TV.NOME AS NOME_DO_VENDEDOR, 
+TV.BAIRRO AS BAIRRO_DO_VENDEDOR,
+TC.BAIRRO AS BAIRRO_DO_CLIENTE, 
+TC.NOME AS NOME_DO_CLIENTE 
+FROM TABELA_DE_CLIENTES TC 
+RIGHT JOIN TABELA_DE_VENDEDORES TV 
+ON TC.BAIRRO = TV.BAIRRO 
+WHERE TC.NOME IS NULL;
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+

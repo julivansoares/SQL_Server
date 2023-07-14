@@ -1,0 +1,62 @@
+Aprendemos que fazendo o comando select, adicionamos a seleção de campos que eu quero ver no meu resultado final da tabela. Eu posso selecionar campos ou posso aplicar funções de agregação a campos numéricos, desde que eu use o group by.
+
+Porém, eu também posso aplicar o que nós chamamos de uma estrutura de classificação. Que pode ser aplicada também a campos textos ou numéricos, ou campos datas, enfim, qualquer tipo de campo da seleção. Só que essa aplicação, ela também é efetuada durante a seleção dos campos.
+
+E essa estrutura de classificação está sendo mostrada aqui nesse slide, nós chamamos de case. Então basicamente eu vou ter condições, testes lógicos que, dependendo do resultado desses testes lógicos, eu vou ter um resultado final.
+
+E eu trabalho da seguinte maneira:
+
+CASE WHEN <CONDIÇÃO> THEN <VALOR>
+     WHEN <CONDIÇÃO> THEN <VALOR>
+     WHEN <CONDIÇÃO> THEN <VALOR>
+     ELSE <VALOR> END
+-------------------------------------------------------------------------
+ntão eu gostaria de listar os meus clientes e ver a sua classificação. Para isso, nós usamos o case, eu usaria dessa maneira aqui:
+SELECT CLIENTE 
+(CASE WHEN NUM_FUNC >= 20 THEN 'GRANDE' ELSE 'PEQUENO' END) 
+FROM CLIENTE;
+--------------------------------------------------------------------------
+
+Vamos criar uma nova consulta. E aí nós vamos listar os meus produtos e os seus preços. Então vou aqui colocar:
+
+SELECT NOME_DO_PRODUTO, PRECO_DE_LISTA 
+FROM TABELA_DE_PRODUTOS;
+--------------------------------------------------------------------------
+
+E digamos que eu queira apenas listar os produtos cujo o sabor é manga:
+
+SELECT NOME_DO_PRODUTO, PRECO_DE_LISTA 
+FROM TABELA_DE_PRODUTOS WHERE SABOR = 'Manga';
+
+---------------------------------------------------------------------------
+
+Então o que eu posso fazer é o seguinte: sobre essa consulta, eu posso aqui colocar uma vírgula e aplicar o meu case. Vamos lá:
+
+SELECT NOME_DO_PRODUTO, PRECO_DE_LISTA 
+(CASE WHEN PRECO_DE_LISTA >12 THEN 'PRODUTO CARO' 
+      WHEN PRECO_DE_LISTA >= 7 AND PRECO_DE_LISTA < 12 THEN 'PRODUTO EM CONTA' 
+      ELSE 'PRODUTO BARATO' END) AS CLASSIFICACAO 
+FROM TABELA_DE_PRODUTOS 
+WHERE SABOR = 'Manga';
+
+----------------------------------------------------------------------------
+
+que eu vou ter? Note que ele já deixou isso em vermelho, ou seja, o order by, o alias funcionou, será que esse vai funcionar? Vamos ver.
+
+Note que não funcionou. Como é que conseguiria agrupar pela classificação? Repetindo a condição no GROUP BY:
+
+SELECT 
+(CASE WHEN PRECO_DE_LISTA >12 THEN 'PRODUTO CARO' 
+      WHEN PRECO_DE_LISTA >= 7 AND PRECO_DE_LISTA < 12 THEN 'PRODUTO EM CONTA' 
+      ELSE 'PRODUTO BARATO' END) AS CLASSIFICACAO, COUNT(*) AS NUMERO_DE_PRODUTOS 
+FROM TABELA_DE_PRODUTOS 
+GROUP BY (CASE WHEN PRECO_DE_LISTA >12 THEN 'PRODUTO CARO' 
+      WHEN PRECO_DE_LISTA >= 7 AND PRECO_DE_LISTA < 12 THEN 'PRODUTO EM CONTA' 
+      ELSE 'PRODUTO BARATO' END);
+
+--------------------------------------------------------------------------------------
+Eu coloco CASE WHEN, uma condição lógica, que eu posso usar as mesmas coisas que eu utilizo lá no where, então eu posso colocar várias condições lógicas entre and, entre or, not, maior, menor, igual e assim por diante.
+
+Então se essa condição for satisfeita, então eu vou ter um valor. Se essa segunda condição for satisfeita, eu vou ter outro valor e no final, eu coloco o else. O else é: se nenhuma condição for satisfeita, esse vai ser o valor final.
+
+E eu fecho o meu case com a palavra end, ok? Então nós podemos aplicar sobre a condição qualquer expressão lógica e em valor, eu posso colocar qualquer coisa, eu posso colocar um campo, posso colocar uma constante e assim por diante.

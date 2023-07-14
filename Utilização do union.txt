@@ -1,0 +1,39 @@
+union e eu tenho uma primeira consulta, onde eu estou selecionando os campos cliente, cidade e estado, eu aplico o union e depois eu tenho a segunda consulta, onde eu estou selecionando os campos fornecedor, cidade e estado.
+
+Vamos ver os requisitos: na primeira consulta, eu tenho três campos, na segunda consulta também três campos. Na primeira consulta eu tenho campos textos, na segunda consulta eu também tenho campos textos, então eu posso executar o union.
+
+Ao fazer esse union, o resultado final vai ser esse:
+
+
+Então nós temos quatro bairros relacionados com vendedores. Então vamos lá, vamos para fazer o union dessas duas consultas. Então se eu pegar a primeira consulta, fizer o union e eu pegar a segunda consulta:
+
+SELECT DISTINCT BAIRRO FROM TABELA_DE_CLIENTES 
+UNION 
+SELECT DISTINCT BAIRRO FROM TABELA_DE_VENDEDORES;
+-----------------------------------------------------------------------------------
+
+Está lá: 13. Essa linha "Copacabana" veio somente de vendedor, porque é o único bairro que não tem cliente que vive nesse bairro e os outros vieram das duas tabelas, ou apenas de uma tabela, mas na hora de fazer o distinct, por causa do union, eles se juntaram.
+
+Agora, se eu aplicar aqui o union all, qual vai ser o resultado?
+
+SELECT DISTINCT BAIRRO FROM TABELA_DE_CLIENTES 
+UNION ALL 
+SELECT DISTINCT BAIRRO FROM TABELA_DE_VENDEDORES;
+-----------------------------------------------------------------------------------
+
+Podemos fazer o seguinte agora: eu posso dizer a origem desse dado. S primeira consulta eu sei que vem de clientes e a segunda consulta eu sei que vem de fornecedor. Então vou fazer:
+
+SELECT DISTINCT BAIRRO, 'CLIENTE' AS ORIGEM FROM TABELA_DE_CLIENTES 
+UNION ALL 
+SELECT DISTINCT BAIRRO, 'FORNECEDOR' AS ORIGEM FROM TABELA_DE_VENDEDORES;
+
+-----------------------------------------------------------------------------------
+
+
+Como eu coloquei agora uma coluna nova, essas duas linhas passaram a ser diferentes. Então se eu aplicar agora o union em vez do union all, o resultado vai ser o mesmo, porque ele não vai conseguir fazer o distinct:
+
+SELECT DISTINCT BAIRRO, 'CLIENTE' AS ORIGEM FROM TABELA_DE_CLIENTES 
+UNION 
+SELECT DISTINCT BAIRRO, 'FORNECEDOR' AS ORIGEM FROM TABELA_DE_VENDEDORES;
+
+-----------------------------------------------------------------------------------

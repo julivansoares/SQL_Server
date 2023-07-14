@@ -1,0 +1,31 @@
+O left join tras todos os dados da tabela do lado esquerdo independente se tem ligação com a outra tabela e tras os dados daoutra tabela que el e tem ligação
+
+
+
+SELECT *FROM TABELA_DE_CLIENTES TC INNER JOIN NOTAS FISCAIS NF ON TC.CPF = NF.CPF;
+
+aí eu vou selecionar os campos CPF da tabela de clientes, que terá o alias CPF_DO_CADASTRO, o NOME da tabela de clientes, que terá o alias NOME_DO_CLIENTE, e o CPF da tabela de notas fiscais, que terá o alias CPF_DA_NOTA:
+
+SELECT TC.CPF AS CPF_DO_CADASTRO, TC.NOME AS NOME_DO_CLIENTE, NF.CPF AS CPF_DA_NOTA FROM TABELA_DE_CLIENTES TC 
+INNER JOIN NOTAS FISCAIS NF ON TC.CPF = NF.CPF;
+
+-----------------------------------------------------------------------------------------------------------------
+
+Então se olharmos essa consulta, eu estou juntando a tabela de clientes com a tabela de notas fiscais pelo campo CPF e eu estou selecionando os campos CPF e NOME da tabela de clientes e o campo CPF que está na tabela de notas fiscais.
+
+Como eu vou fazer um join com a tabela de notas fiscais e a tabela de notas fiscais tem um vários registros, vamos selecionar só os clientes que tiveram vendas, sem dados repetidos. Como é que nós só trazemos as combinações que existem?
+
+Vimos isso em vídeos anteriores, usamos o distinct. Então se eu por acaso aplicar a palavra distinct, eu tenho aqui o meu resultado, só as combinações existentes e note, eu tenho 15 resultados, significa que 15 clientes compraram pelo menos alguma coisa na minha empresa:
+
+SELECT DISTINCT 
+TC.CPF AS CPF_DO_CADASTRO, TC.NOME AS NOME_DO_CLIENTE, NF.CPF AS CPF_DA_NOTA
+FROM TABELA_DE_CLIENTES TC 
+INNER JOIN NOTAS FISCAIS NF ON TC.CPF = NF.CPF;
+
+------------------------------------------------------------------------------------------------------------------
+
+SELECT DISTINCT 
+TC.CPF AS CPF_DO_CADASTRO, TC.NOME AS NOME_DO_CLIENTE, NF.CPF AS CPF_DA_NOTA
+FROM TABELA_DE_CLIENTES TC 
+LEFT JOIN NOTAS FISCAIS NF ON TC.CPF = NF.CPF;
+
