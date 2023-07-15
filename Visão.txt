@@ -1,0 +1,58 @@
+
+
+ssa aqui foi a consulta que nós fizemos usando sub query, substituindo o having:
+
+SELECT ESTADO_FUNC.ESTADO, ESTADO_FUNC.NUM_FUNC FROM (   
+    SELECT ESTADO, SUM(NUM_FUNC) 
+    FROM CLIENTE 
+    ORDER BY ESTADO
+) ESTADO_FUNC 
+WHERE ESTADO_FUNC.NUM_FUNC > 60;
+
+-----------------------------------------------------------------------------------------------------
+
+Mas digamos que essa sub query que está aqui dentro, é muito usada não somente para esta consulta, mas para outras. Nós podemos então pegar aquele princípio que eu mencionei no vídeo anterior, que se nós pudéssemos pegar essa consulta e salvar em memória com um nome, eu poderia usar essa tabela, que na verdade não existe, mas ela é uma tabela virtual, dentro de qualquer outra consulta.
+
+Nós podemos fazer isso e são as visões, ou views. Então podemos criar uma view, dar um nome para essa view, por exemplo ESTADO_FUNC e eu posso usar depois essa view dentro das minhas queries. Vamos fazer o seguinte, vamos lá no Management Studio praticar isso.
+
+Então eu vou pegar o script do vídeo anterior:
+
+SELECT MEDIA_EMBALAGENS.EMBALAGEM, MEDIA_EMBALAGENS.PRECO_MEDIO FROM (
+    SELECT EMBALAGEM, AVG(PRECO_DE_LISTA) AS PRECO_MEDIO 
+    FROM TABELA_DE_PRODUTOS 
+    GROUP BY EMBALAGEM
+) MEDIA_EMBALAGENS 
+WHERE MEDIA_EMBALAGENS.PRECO_MEDIO <= 10;
+
+------------------------------------------------------------------------------------------------------
+
+E vou criar aqui nova consulta associada à base de dados SUCOS_FRUTAS, com o conteúdo somente da sub query:
+
+SELECT EMBALAGEM, AVG(PRECO_DE_LISTA) AS PRECO_MEDIO 
+FROM TABELA_DE_PRODUTOS 
+GROUP BY EMBALAGEM;COPIAR CÓDIGO
+
+------------------------------------------------------------------------------------------------------
+Se nós executarmos essa consulta, nós temos lá o nosso resultado. Eu vou colocar o comando CREATE VIEW antes dessa consulta, vou dar o nome MEDIA_EMBALAGENS AS e a consulta que ficará da seguinte forma:
+
+CREATE VIEW MEDIA_EMBALAGENS AS 
+SELECT EMBALAGEM, AVG(PRECO_DE_LISTA) AS PRECO_MEDIO 
+FROM TABELA_DE_PRODUTOS 
+GROUP BY EMBALAGEM;COPIAR CÓDIGO
+
+-------------------------------------------------------------------------------------------------------
+É interessante que você o comando create view na primeira linha do seu script. Vou executar e terei a visão criada dentro do Management Studio. Como eu estou usando o Management Studio em português, ele em vez de falar visão, ele mostra como Exibições.
+
+As exibições, no Management Studio, são as visões. Se abrirmos aqui, clicar com o botão direito do mouse e atualizar, note que eu tenho uma visão chamada MEDIA_EMBALAGENS. Logo, se eu chegar aqui e fizer SELECT * FROM MEDIA_EMBALAGENS, note que eu vou ter o resultado como se esta consulta que está aqui virasse uma tabela de verdade.
+
+Logo, se eu voltar para o script da sub query , eu poderia muito bem fazer isso:
+
+SELECT EMBALAGEM, PRECO_MEDIO FROM MEDIA_EMBALAGENS 
+WHERE PRECO_MEDIO <= 10;COPIAR CÓDIGO
+--------------------------------------------------------------------------------------------------------
+
+Então note que agora eu fiz uma consulta pegando o meu MEDIA_EMBALAGENS e vendo os preços que são menores ou iguais a 10. E aí, como eu estou usando uma visão, eu não preciso usar alias.
+
+Eu posso usar MEDIA_EMBALAGENS em outras sub queries, em outras consultas, como se fosse uma tabela. Essa visão, ela é lógica, significa que toda vez que eu chamá-la dentro de um from, de um select, na verdade a consulta que está por de trás da criação da visão que será resolvida.
+
+A visão tem uma performance pior do que a seleção em cima da própria tabela, porque a tabela está armazenada fisicamente, enquanto que a visão é uma relação apenas lógica.

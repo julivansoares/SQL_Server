@@ -1,0 +1,65 @@
+Como no meu filtro, eu tinha um agrupamento como critério de filtro, eu não posso usar esse agrupamento dentro do where, então eu utilizo o having para fazer isso. Mas eu posso fazer esta consulta através de sub query, vamos ver como.
+
+[00:55] Primeiro vamos separar as consultas. Eu tenho a minha consulta que faz o agrupamento do número de funcionários por estado:
+
+SELECT ESTADO, SUM(NUM_FUNC) 
+FROM CLIENTE 
+GROUP BY ESTADO;
+
+
+---------------------------------------------------------------------------------------------------------------
+O resultado dessa consulta é o ESTADOX com 90 e o ESTADOY com 50.
+
+Vamos supor que eu pudesse colocar em memória o resultado desta consulta, dando um nome para ela, como se fosse naquelas calculadoras, que nós fazemos uma soma e colocamos lá na memória para depois usar aquele resultado em uma outra operação matemática.
+
+Então eu pego a minha consulta, dou o nome daquele resultado como sendo ESTADO_FUNC e aí depois eu pego esta consulta e faço uma segunda consulta:
+
+SELECT ESTADO, NUM_FUNC 
+FROM ESTADO_FUNC 
+WHERE NUM_FUNC > 60;
+
+
+
+---------------------------------------------------------------------------------------------------------------
+ Então ao aplicar essa segunda consulta sobre esta tabela que está em memória, eu vou ter o resultado final, ou seja, eu tive duas consultas, fiz a primeira e sobre o resultado da primeira eu fiz a segunda. Quando nós temos esse tipo de engrenagem, podemos usar sub query:
+
+SELECT ESTADO, NUM_FUNC FROM (
+    SELECT ESTADO, SUM(NUM_FUNC) 
+    FROM CLIENTE 
+    GROUP BY ESTADO
+) WHERE NUM_FUNC > 60;
+
+
+
+---------------------------------------------------------------------------------------------------------------
+
+Como já explicado em vídeos anteriores, quando usamos sub query dentro de um from, eu sou obrigado a colocar alias. Então eu posso dar lá um alias, como por exemplo ESTADO_FUNC:
+
+SELECT ESTADO_FUNC.ESTADO, ESTADO_FUNC.NUM_FUNC FROM (
+    SELECT ESTADO, SUM(NUM_FUNC) 
+    FROM CLIENTE 
+    GROUP BY ESTADO
+) ESTADO_FUNC WHERE ESTADO_FUNC.NUM_FUNC > 60;
+
+
+
+---------------------------------------------------------------------------------------------------------------
+Claro que usando o having fica mais simples, mas dependendo da situação que você fique mais confortável, você pode usar uma ou outra. Mas eu quis exemplificar como é que eu posso usar melhor a sub query e como é que ela substitui algumas funcionalidades que nos já aprendemos aqui no curso.
+
+[03:50] Então eu vou fazer o seguinte, vamos lá no Management Studio praticar a sub query.
+
+[03:56] Vamos lá, vamos criar uma nova consulta associada à base SUCO_FRUTAS e aí vamos fazer uma média do preço de lista por embalagens:
+
+SELECT EMBALAGEM, AVG(PRECO_DE_LISTA) AS PRECO_MEDIO 
+FROM TABELA_DE_PRODUTOS GROUP BY EMBALAGEM;
+
+
+---------------------------------------------------------------------------------------------------------------
+
+Temos lá os preços médios das embalagens de garrafa, lata e PET. Se eu quiser só olhar as embalagens que são menores do que o preço médio igual a 10:
+
+SELECT EMBALAGEM, AVG(PRECO_DE_LISTA) AS PRECO_MEDIO 
+FROM TABELA_DE_PRODUTOS GROUP BY EMBALAGEM 
+HAVING AVG(PRECO_LISTA) <= 10;
+
+---------------------------------------------------------------------------------------------------------------

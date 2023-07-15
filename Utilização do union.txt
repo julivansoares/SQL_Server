@@ -37,3 +37,7 @@ UNION
 SELECT DISTINCT BAIRRO, 'FORNECEDOR' AS ORIGEM FROM TABELA_DE_VENDEDORES;
 
 -----------------------------------------------------------------------------------
+Quando eu quero listar todos os registros, listando os repetidos, qual UNION eu devo usar?
+
+R== UNION ALL
+-----------------------------------------------------------------------------------

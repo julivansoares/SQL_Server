@@ -1,0 +1,33 @@
+Como é que eu faria isso? A consulta, que dá como resposta cliente1 e cliente2, eu poderia colocar dentro do in, assim:
+
+SELECT * FROM MOVIMENTO WHERE CLIENTE IN (
+    SELECT CLIENTE FROM CLIENTE
+) WHERE NUM_FUNC = 10;
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+Então se eu rodar esta consulta, eu vou ter o mesmo resultado com uma única consulta e não usando join.
+
+Isso chama-se sub query. O processo de sub query é muito usado, nós usamos bastante quando fazemos queries complexas, porque com a sub query, arrumamos a consulta e utilizamos o resultado dessa consulta em outro processo.
+
+A sub query pode ser usada também como se fosse uma tabela, depois de from, aí em vez de ser uma tabela, pode ser uma outra consulta, olha o exemplo:
+
+SELECT SUBTABELA.* FROM 
+(
+    SELECT CLIENTE, CIDADE,ESTADO
+    FROM CLIENTE
+    UNION
+    SELECT FORNECEDOR, CIDADE,ESTADO
+    FROM FORNECEDOR
+) 
+SUBTABELA
+
+
+A única diferença é que quando eu uso sub queries dentro de um from, eu sou obrigado a criar um alias. No caso do exemplo, o resultado dessa consulta está dentro de SUBTABELA.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+u poderia muito bem pegar a primeira consulta e colocar dentro do in da segunda consulta:
+
+SELECT * FROM TABELA_DE_CLIENTES 
+WHERE BAIRRO IN (SELECT DISTINCT BAIRRO FROM TABELA_DE_VENDEDORES);
+
