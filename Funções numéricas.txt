@@ -1,0 +1,91 @@
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                 ROUND
+o round, que retorna um valor numérico arredondado, usando o comprimento de precisão de arredondamento, passado como segundo parâmetro da função. Então por exemplo, se eu quiser arredondar o número 32,23332 com duas casas decimais:
+
+ROUND(32.23332, 2)COPIAR CÓDIGO
+
+R:= 32,23.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                CEILING
+
+O ceiling retorna o menor inteiro, maior que ou igual à expressão numérica identificada. Então, se eu tiver o número 32,23332 e eu aplicar o ceiling:
+
+CEILING(32.23332)COPIAR CÓDIGO
+A parte inteira é 32, então o resultado vai ser 33, que é o menor inteiro, maior do que o inteiro existente.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                               FLOOR
+
+o floor vai fazer o contrário do ceiling, ele vai retornar o maior inteiro, menor ou igual que a expressão numérica especificada. Então se eu tenho:
+
+FLOOR(32,23332)COPIAR CÓDIGO
+
+O menor inteiro vai ser o próprio 32.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                              POWER
+                                         
+O power vai retornar a potência, vai ser um número elevado a um fator. Então se eu fizer:
+
+POWER(2, 10)COPIAR CÓDIGO
+
+É a mesma coisa que 2 elevado a 10, que vai dar o resultado de 1024.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                             EXP   
+O exp vai retornar o valor exponencial da expressão passada por parâmetro para a função. É baseada na constante e (2,71828182845905), que é a base dos logaritmos naturais.
+
+O expoente de um número é a constante e elevada à potência do número passado por parâmetro. E aí se eu colocar, por exemplo:
+
+EXP(10)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                             SQRT
+
+ A função sqrt resolve a raiz quadrada, então ele resolve a raiz quadrada do valor flutuante que foi passado por parâmetro para a função. Então, se eu fizer:
+
+SQRT(144)COPIAR CÓDIGO
+O resultado será 12, porque a raiz quadrada de 144 é 12.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                             SIGN
+
+O sign vai retornar um sinal positivo ou negativo, dependendo do sinal do número passado por parâmetro para a função. Então se o número for positivo, ele vai retornar 1, se o número é negativo ele vai retornar -1:
+
+SIGN(-10)COPIAR CÓDIGO
+Como -10 é negativo, essa função retornará o número -1.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+					    ABS
+
+O abs vai retornar o valor absoluto e sempre positivo da expressão numérica que foi passada por parâmetro para a função. Então se eu tenho:
+
+ABS(-10)COPIAR CÓDIGO
+A função vai retornar o número 10. Então, sempre vai ser o valor absoluto, o valor positivo do número.
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+                                         percent 
+
+
+O percent é uma função que calcula o resto da divisão entre dois números:
+
+dividendo % divisorCOPIAR CÓDIGO
+Assim, eu tenho resto. Por exemplo: 10 % 3 é o resto da divisão de 10 por 3, que será 1.
+
+Eu tenho uma série de outras funções que eu posso usar no SQL Server, relacionados com outras partes da matemática ou geometria:
+
+log, que retorna o logaritmo natural de uma expressão float, passada por parâmetro para a função.
+
+log10, que retorna o logaritmo na base 10 da expressão float passada por parâmetro para a função.
+
+Funções aritméticas como: ACOS, ATAN, ASIN, COS, TAN e SIN.
+
+PI, que retorna o número PI, que é muito importante na geometria, principalmente para calcular raios ou áreas de círculo, etc.
+
+
+

@@ -1,0 +1,99 @@
+O datepart é uma parte da data, então o datepart pode ser a palavra year, quarter, month, dayofyear, day, week, hour, minute. Abaixo tem uma tabela mostrando o que pode ser datepart
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+                                      DATEADD
+
+Vamos voltar para a função dateadd e entender como ela é usada. Eu escrevo dateadd e escolho um datepart, day, por exemplo. Então se eu escrever day, passar como parâmetro um número inteiro positivo ou negativo, no caso eu escolhi um positivo, o valor 30, e uma data, ele vai somar 30 dias àquela data:
+
+DATEADD(DAY, 30, '2022-01-01')
+
+//////////////////////////////////
+DATEADD(MONTH, 30, '2022-01-01')
+Se eu tivesse escolhido o datepart month, ele irá somar 30 meses à data, então ele vai sempre somar ou diminuir, dependendo se o valor passado como parâmetro for positivo ou negativo.
+
+Então, o resultado será aquela mesma data 30 dias para frente:
+
+2022-01-31
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+                                        DATEDIFF
+   
+datediff. Essa função vai retornar um número, que é um valor inteiro, que pode ser positivo ou negativo, que expressa os dateparts da diferença entre duas datas.
+
+DATEDIFF(DAY, '2022-01-01', '2022-04-12')COPIAR CÓDIGO
+
+O que irá acontecer? A função calculará a diferença entre essas duas datas e mostrará o resultado expresso em dias, porque o datepart escolhido foi day. Se eu tivesse escrito month, o resultado da diferença entre essas duas datas seria expresso em meses, e assim por diante.
+
+Resultado:=101 dias.
+
+E o datediff, eu quero saber por exemplo quantos dias se passaram desde o primeiro dia do ano:
+
+SELECT DATEDIFF(DAY, '2022-01-01', GETDATE()) AS DIAS_DESDE_INICIO_ANO;
+
+///////////////////////////////////////////////////////////////////////////////////////////
+                                       DATEPAR
+                                   
+xiste também a função datepart, que não podemos confundir com o parâmetro do dateadd e do datediff. Esse parâmetro e a função datepart são coisas diferentes.
+
+Com a função datepart, passamos uma data e posso ver o ano, o mês, o dia, a hora, o minuto dessa data. Então se eu escrevo:
+
+DATEPART(DAY, '2022-01-01')COPIAR CÓDIGO
+Nos será retornado o dia dessa data, logo o resultado será 1.
+
+E aí eu posso ir mudando o datepart, então se eu quiser ver o número de horas desde o primeiro dia do ano, basta trocar day por hour:
+
+SELECT DATEDIFF(HOUR, '2022-01-01', GETDATE()) AS HORAS_DESDE_INICIO_ANO;COPIAR CÓDIGO
+
+Da mesma forma que, se eu colocar month, vamos ver o número de meses:
+
+SELECT DATEDIFF(MONTH, '2022-01-01', GETDATE()) AS MESES_DESDE_INICIO_ANO;
+
+///////////////////////////////////////////////////////////////////////////////////////////
+                                       getdate
+
+A função getdate vai retornar a data do computador de onde a instância do banco de dados está rodando. Então se eu executo a função GETDATE(), por exemplo, eu vou ter a data, a hora, o minuto, o segundo e o milissegundo do momento em que eu executei a função.
+
+A função day, se eu colocar DAY(DATE), eu vou ver o dia da data. Semelhante à função datepart, quando eu uso day como parâmetro.
+
+Na função month, eu vou ver o mês da data e na função year, verei o ano da data.
+
+SELECT DATEADD(DAY, 10, GETDATE());COPIAR CÓDIGO
+E pode colocar, por exemplo, um alias:
+
+SELECT GETDATE() AS DATA_HOJE, DATEADD(DAY, 10, GETDATE()) AS DATA_DAQUI_10_ DIAS;COPIAR CÓDIGO
+
+Se eu quiser saber qual data representa 48 dias atrás, basta eu fazer:
+
+SELECT DATEADD(DAY,-48, GETDATE()) AS DATA_48_DIAS_ATRAS
+
+///////////////////////////////////////////////////////////////////////////////////////////
+                                       ISDATE                           
+
+A funçãoisdate testa para saber se a expressão passada por parâmetro é uma data válida ou não. Então por exemplo, se eu escrevo:
+
+ISDATE('2022-02-31')COPIAR CÓDIGO
+A data 31 de fevereiro de 2022 não existe, então o resultado vai ser o número 0, de falso.
+
+Se a data fosse válida, a função isdate retornaria o número 1.
+
+///////////////////////////////////////////////////////////////////////////////////////////
+                                 DATETIMEFROMPARTS   
+
+A função datetimefromparts vai retornar uma data baseado em inteiros separados por vírgula, onde eu vou expressar o ano, o mês, o dia, a hora, o minuto, o segundo e o milissegundo:
+
+DATETIMEFROMPARTS(ano, mes, dia, hora, minuto, segundos, milissegundo)COPIAR CÓDIGO
+Então se eu escrevo:
+
+DATETIMEFROMPARTS(2022, 12, 14, 15, 34, 22, 30)COPIAR CÓDIGO
+[06:05] Ou seja, eu quero que essa função retorne uma data onde o ano é 2022, o mês é 12, o dia é 14 e assim por diante:
+
+2022-12-14 15:34:22.030
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+

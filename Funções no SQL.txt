@@ -1,0 +1,170 @@
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                            Funções de texto
+
+
+
+
+////////////////////////////////////////////////////////////
+                    LOWER
+
+A função lower pega um string ou uma expressão de caracteres e vai converter essa expressão de caracteres apenas para caracteres minúsculos. Para usar a função, coloco lower e entre aspas simples o campo ou o texto que eu quero aplicar a função.
+
+Por exemplo:
+
+LOWER('o jOÃO eSTEVE lá em casa')COPIAR CÓDIGO
+
+Note que essa frase está escrita com letras maiúsculas e letras minúsculas, o resultado dessa função vai ser a mesma frase apenas com letras minúsculas:
+
+R=:'o joão esteve lá em casa'
+
+SELECT NOME, LOWER(NOME) AS NOME_MINUSCULO 
+FROM TABELA_DE_CLIENTES;
+
+/////////////////////////////////////////////////////////////
+                 UPPER  
+Vamos seguindo. A próxima função é a upper, que é o inverso do lower. Essa função vai pegar uma expressão de caracteres e vai converter tudo que é minúsculo em maiúsculo.
+
+Por exemplo, se eu tenho aquela mesma frase:
+
+UPPER('o jOÃO eSTEVE lá em casa')COPIAR CÓDIGO
+
+O resultado será:
+
+R:='O JOÃO ESTEVE LÁ EM CASA'
+
+SELECT NOME, LOWER(NOME) AS NOME_MINUSCULO, UPPER(NOME) AS NOME_MAIUSCULO 
+FROM TABELA_DE_CLIENTES;
+
+////////////////////////////////////////////////////////////
+                 CONCAT
+
+a concat. Essa função vai retornar uma cadeia de caracteres ou uma string, resultante da concatenação, ou seja, da junção de dois ou mais outros valores de caracteres. E aí eu uso a função concat e os strings que eu quero concatenar separados por vírgula.
+
+Uma observação: o SQL Server também aceita que eu pegue esses strings e coloque entre eles o símbolo de somar. Então em vez de usar concat e os strings separados com vírgula, eu apenas escrevo esses strings separados pelo símbolo de mais (+).
+
+O resultado vai ser o mesmo. Então por exemplo, se eu quiser concatenar os seguintes strings: 'O JOÃO', concatenado com ' ESTEVE ', concatenado com 'LÁ EM CASA':
+
+CONCAT('O JOÃO', ' ESTEVE ', 'LÁ EM CASA')COPIAR CÓDIGO
+
+Quando eu rodar essa função eu vou ter este resultado:
+
+'O JOÃO ESTEVE LÁ EM CASA'
+
+SELECT NOME, CONCAT(ENDERECO_1, ' ', BAIRRO, ' ', CIDADE, ' ', ESTADO, ' - ', CEP) AS ENDERECO_COMPLETO 
+FROM TABELA_DE_CLIENTES;
+
+//////////////////////////////////////////////////////////
+                    RIGHT
+
+A função right vai retornar a parte direita de uma cadeia de caracteres, usando como parâmetro o número de caracteres especificados na segunda parte da função.
+
+Então por exemplo, digamos que temos:
+
+RIGHT('O JOÃO ESTEVE LÁ EM CASA', 6)COPIAR CÓDIGO
+
+Então eu vou pegar os seis últimos caracteres dessa frase, então o meu resultado será:
+
+R:= 'M CASA'
+
+SELECT NOME, ENDERECO_1 + ' ' + BAIRRO + ' ' + CIDADE + ' ' + ESTADO + ' - ' + CEP) AS ENDERECO_COMPLETO 
+FROM TABELA_DE_CLIENTES`;
+
+/////////////////////////////////////////////////////////
+                     LEFT   
+
+Já a função left faz o inverso do right, retornando a parte esquerda de uma cadeia de caracteres, sempre usando o número de caracteres especificados no segundo parâmetro da função. Então se eu tiver a mesma frase:
+
+LEFT('O JOÃO ESTEVE LÁ EM CASA', 6)COPIAR CÓDIGO
+
+Logo, só vou pegar o string 'O JOÃO', referente aos seis primeiros caracteres.
+
+O replicate vai repetir o valor de caracteres que está na função, usando como parâmetro o número especificado como número de vezes. Então se eu tiver a frase "O JOÃO ESTEVE LÁ EM CASA" e aplicar eu replicate duas vezes:
+
+REPLICATE('O JOÃO ESTEVE LÁ EM CASA', 2)
+
+O resultado vai ser a frase repetida duas vezes:
+
+R:='O JOÃO ESTEVE LÁ EM CASA O JOÃO ESTEVE LÁ EM CASA'
+
+
+SELECT NOME_DO_PRODUTO, LEFT(NOME_DO_PRODUTO, 3) AS TRES_PRIMEIROS_CHAR 
+FROM TABELA_DE_PRODUTOS;
+
+////////////////////////////////////////////////////////
+                  SUBSTRING
+
+O substring vai retornar uma parte da expressão de caracteres, partindo do ponto inicial que será passado como parâmetro para a função e o número de caracteres a serem extraídos. Por exemplo, eu quero rodar o seguinte substring:
+
+SUBSTRING('O JOÃO ESTEVE LÁ EM CASA', 3, 10)COPIAR CÓDIGO
+
+Nesse string, o caractere "O" é a posição 1, o espaço em branco é a posição 2 e a posição 3 é o "J". Então vamos começar a partir do "J" e serão selecionados os próximos dez caracteres, incluindo o caractere da posição inicial:
+
+'JOÃO ESTEV'
+
+////////////////////////////////////////////////////////
+                  LTRIM
+
+ltrim remove os caracteres que são espaços, ou seja, o char(32) ou outros caracteres especificados, se você quiser especificar o caractere que você quer que seja retirado, no início do texto.
+
+Por exemplo, eu tenho uma série de espaços em branco e depois eu tenho a frase "O JOÃO ESTEVE LÁ EM CASA":
+
+LTRIM('          O JOÃO ESTEVE LÁ EM CASA')COPIAR CÓDIGO
+
+Se eu aplico a função ltrim, o meu resultado é a frase completa sem o conjunto de espaços no início da frase:
+
+'O JOÃO ESTEVE LÁ EM CASA'
+
+
+//////////////////////////////////////////////////////
+                 RTRIM
+
+A função rtrim faz a mesma coisa que o ltrim, porém do lado direito. Por exemplo:
+
+RTRIM('O JOÃO ESTEVE LÁ EM CASA          ')COPIAR CÓDIGO
+
+Quando eu aplico o rtrim o espaço some, eu tenho a frase completa:
+
+'O JOÃO ESTEVE LÁ EM CASA'
+
+///////////////////////////////////////////////////
+                  TRIM
+
+Já um trim remove tanto os espaços da esquerda quanto os espaços da direita:
+
+TRIM('      O JOÃO ESTEVE LÁ EM CASA      ')COPIAR CÓDIGO
+
+Ao aplicar o trim eu vou ter a frase sem espaço, tanto no início quanto no final:
+
+'O JOÃO ESTEVE LÁ EM CASA'
+
+
+/////////////////////////////////////////////////
+                 REPLACE
+                
+O replace vai substituir um conjunto de caracteres por outro especificado. Por exemplo, eu quero substituir os espaços vazios por um traço:
+
+REPLACE('O JOÃO ESTEVE LÁ EM CASA', ' ', '-')COPIAR CÓDIGO
+
+Note que temos vários espaços nessa frase. Então eu vou substituir onde tem espaço por um traço, então o resultado será:
+
+'O-JOÃO-ESTEVE-LÁ-CASA'
+
+SELECT TAMANHO, REPLACE((REPLACE(TAMANHO, 'Litros', 'L')), 'Litro', 'L') AS TAMANHO_MODIFICADO 
+FROM TABELA_DE_PRODUTOS;
+
+
+///////////////////////////////////////////////
+                 LEN
+               
+O len retorna o número de caracteres do texto que está sendo especificado, excluindo os espaços que possam haver à direita.
+
+Por exemplo:
+
+LEN('O JOÃO ESTEVE LÁ EM CASA')
+
+
+R:= O resultado será 24, ou seja, eu tenho 24 caracteres nesse string. Lembrando, os espaços no início não contam, mas os espaços do meio contam.
+
+/////////////////////////////////////////////

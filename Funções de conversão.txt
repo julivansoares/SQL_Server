@@ -1,0 +1,67 @@
+:03] Eu tenho nas linhas e nas colunas os tipos e, dependendo do símbolo, eu vou ter uma conversão explícita (representada pelo quadrado azul), uma conversão implícita (representada pelo círculo laranja), uma conversão que não é possível (representada pelo X vermelho), ou seja, esse tipo de cruzamento não é possível converter, ou uma conversão que exige de forma explícita a função cast (representada pelo losango cinza) e aqui eu tenho outro outros tipos de cruzamentos, provavelmente associados com tipos XML ou JSON, que nós não estamos nem cobrindo aqui nesse treinamento.
+
+[05:45] Para conversões explícitas, a própria instrução determina o tipo de dado resultante, então, quando eu faço a conversão explícita, eu não preciso dizer qual é o tipo de dado que está sendo convertido.
+
+[06:06] Já para conversões implícitas, eu tenho que atribuir qual é o tipo de dado que eu quero converter.
+
+[06:21] Vamos para o Management Studio praticar um pouco a conversão de dados e entender como é que nós trabalhamos com cast e com convert.
+
+[06:33] Vou criar uma nova consulta e aí lembra das máscaras das datas, vamos lá:
+
+SELECT CONVERT(VARCHAR(10), GETDATE(), 121);COPIAR CÓDIGO
+Como eu estou convertendo uma data para texto, eu preciso especificar o tipo desse texto, por exemplo VARCHAR(10). E especificamos a máscara 121 (yyyy-mm-dd hh:mi:ss.mmm). Vamos ver o que vai acontecer ao executar:
+
+(Nenhum nome de coluna)
+2022-10-18
+[07:35] Note que eu só estou vendo o dia, por quê? Porque o tamanho da máscara é de 23 caracteres, mas nós definimos um VARCHAR(10), então ele só exibiu os dez primeiros caracteres dessa máscara. Então, para utilizar essa máscara 121, preciso aumentar o tamanho do VARCHAR, como, por exemplo, 25 caracteres:
+
+SELECT CONVERT(VARCHAR(25), GETDATE(), 121);COPIAR CÓDIGO
+[08:29] Quando eu vou converter uma data para texto, é importante que eu coloque a definição do texto com o número de caracteres que coincida com o tamanho final da máscara.
+
+[08:51] Agora, se nós vermos na tabela de clientes:
+
+SELECT * FROM TABELA_DE_CLIENTES;COPIAR CÓDIGO
+Nós temos o campo DATA_DE_NASCIMENTO, que é a data de nascimento do cliente. Podemos converter essa data:
+
+SELECT DATA_DE_NASCIMENTO, CONVERT(VARCHAR(25), DATA_DE_NASCIMENTO, 121) 
+FROM TABELA_DE_CLIENTES;COPIAR CÓDIGO
+[09:34] Se eu executar isso daqui, teremos um resultado diferente do esperado. Aí você pode perguntar: "mas colocamos o tamanho do VARCHAR como 25, então por que a hora, o minuto e o segundo não foram exibidos?". Porque se nós olharmos o tipo original desse campo, ele é um campo date e não datetime.
+
+[10:09] Então, essa data de nascimento que está na tabela, ela não tem hora, minuto e segundo gravada, porque o tipo date não comporta hora, minuto, segundo e milissegundo. Então não adianta usar uma máscara para exibir hora, minuto, segundo e milissegundo, se o campo que está gravado na tabela não tem isso.
+
+[10:30] Na seleção anterior, funcionou o getdate é uma função que traz a hora do computador e a data também, com toda a regularidade de tempo. Enquanto que o campo que está sendo usado na tabela não tem todas as informações referentes à hora, minuto e segundo. Então por isso que o resultado não deu igual.
+
+[10:53] Agora, se nós escolhermos uma outra máscara, por exemplo, a 106 (dd mon yyyy):
+
+SELECT DATA_DE_NASCIMENTO, CONVERT(VARCHAR(25), DATA_DE_NASCIMENTO, 106) 
+FROM TABELA_DE_CLIENTES;COPIAR CÓDIGO
+
+
+Eu consigo ver então a data de nascimento do cliente no formato escolhido, olhando o mês em três letras.
+
+Outra coisa, por exemplo, eu tenho o nome do produto e o preço de lista na tabela de produtos:
+
+SELECT NOME_DO_PRODUTO, PRECO_DE_LISTA FROM TABELA_DE_PRODUTOS;COPIAR CÓDIGO
+
+Digamos que eu queira escrever um texto, em vez de exibir apenas o preço do produto, eu vou escrever um texto dizendo "O preço de lista é tal preço", um texto mais bonito para aparecer na tabela.
+
+Então eu poderia usar a função concat, onde eu escreverei:
+
+SELECT NOME_DO_PRODUTO, CONCAT('O preço de lista é: ', PRECO_DE_LISTA) AS PRECO 
+
+FROM TABELA_DE_PRODUTOS;COPIAR CÓDIGO
+
+Ao executar, note que foi feita uma conversão implícita. Ele automaticamente converteu o preço de lista, que é um float, em texto.
+
+Mas se eu quisesse converter de forma explícita, bastaria eu ter feito:
+
+SELECT NOME_DO_PRODUTO, 
+
+CONCAT('O preço de lista é: ', CAST(PRECO_DE_LISTA AS VARCHAR(10))) AS PRECO 
+
+FROM TABELA_DE_PRODUTOS;COPIAR CÓDIGO
+
+Então eu estou convertendo o preço de lista em um VARCHAR(10). Isso é uma conversão onde eu estou dizendo qual é o tipo que eu quero escrever. Não preciso usar o cast, porque se olharmos novamente a tabela de conversões, o float é convertido implicitamente para texto.
+
+Na conversão implícita, eu posso fazer essa conversão de forma automática. Essa regra às vezes não funciona direito, não no caso de data, mas pode ser um tipo especial que não funciona, então a primeira coisa que você pode estar testando é usar o concat: se der erro e não funcionar, você usa o cast, pegando o campo e convertendo para o novo tipo que quiser.
+
